@@ -1,0 +1,73 @@
+<template>
+    <div class="slds-var-p-horizontal_small slds-table--header-fixed_container" style="height:calc(100vh-180px);">
+        
+     <!-- class="slds-table slds-table_fixed-layout" -->
+     <div class="slds-scrollable_y" style="height:55vh;">
+        <table  class="slds-table slds-table_fixed-layout slds-table slds-table_bordered slds-table--header-fixed">
+            <thead>
+                <tr class="slds-text-title_caps">
+                    <th scope="col">
+                    <div class="slds-truncate slds-cell-fixed slds-media slds-media_center" style="width:20%; background:rgb(100, 216, 178)" title="Type">Type</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate slds-cell-fixed slds-media slds-media_center" style="width:20%;background:rgb(100, 216, 178)" title="Name">Name</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate slds-cell-fixed slds-media slds-media_center" style="width:20%;background:rgb(100, 216, 178)" title="Permission Type">Permission Type</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate slds-cell-fixed slds-media slds-media_center" style="width:20%;background:rgb(100, 216, 178)" title="Value">Value</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate slds-cell-fixed slds-media slds-media_center" style="width:20.6%;background:rgb(100, 216, 178)" title="Access">Access</div>
+                    </th>
+                </tr>
+            
+            </thead>
+            <tbody class="slds-scrollable">
+                <!-- <div class="slds-scrollable"> -->
+                    <template if:true={renderData}>
+                        <template for:each={renderData} for:item="typeData">
+                            <tr key={typeData.key} class="slds-hint-parent" >
+                                <td rowspan={typeData.rowspan} data-label="typeData.type" title={typeData.type}>
+                                    <div class="slds-truncate">{typeData.type}</div>
+                                </td>
+                            </tr>
+                            <template for:each={typeData.permissionSetProfileData} for:item="profileData">
+                                <tr key={profileData.key}>
+                                    <td rowspan={profileData.rowspan} data-label="profileData.name"
+                                        title={profileData.name}>
+                                        
+                                        <a href={profileData.href}  target="_blank" class="wrapHyperLink">{profileData.name}</a>
+                                    </td>
+                                </tr>
+                                <template for:each={profileData.permissionTypeData} for:item="permissionTypeData">
+                                    <tr key={permissionTypeData.key}>
+                                        <td data-label="permissionTypeData.permissionType"
+                                            rowspan={permissionTypeData.rowspan}
+                                            title={permissionTypeData.permissionType}>
+                                            <div class="slds-truncate">{permissionTypeData.permissionType}</div>
+                                        </td>
+                                    </tr>
+                                    
+                                    <template for:each={permissionTypeData.permissions} for:item="permissions">
+                                        <tr key={permissions.key}>
+                                            <td data-label="permissions.value" title={permissions.value}>                                     
+                                                <div class="slds-truncate">{permissions.value}</div>
+                                            </td>
+                                            <td data-label="permissions.access" title={permissions.access}>
+                                                <div class="slds-truncate">{permissions.access}</div>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                </template>
+                            </template>
+                        </template>
+                    </template>
+                <!-- </div> -->
+            </tbody>
+        </table>
+    </div>
+    </div>
+</template>
+
